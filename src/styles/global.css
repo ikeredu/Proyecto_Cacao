@@ -1,0 +1,119 @@
+/* Google Fonts Imports */
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Manrope:wght@400;700&display=swap');
+
+:root {
+  /* Colors from DESIGN.md */
+  --color-background: #faf9f6;
+  --color-surface: #faf9f6;
+  --color-surface-variant: #e3e2e0;
+  --color-primary: #230804;
+  --color-primary-container: #3d1c16;
+  --color-on-primary-container: #b28077;
+  --color-secondary: #615e53;
+  --color-secondary-container: #e4dfd1;
+  --color-tertiary: #001500;
+  --color-tertiary-container: #112b0b;
+  --color-outline: #837471;
+  --color-outline-variant: #d5c2bf;
+  --color-error: #ba1a1a;
+  
+  /* Accent color representing the living cacao plant */
+  --color-accent-green: #4a6741;
+  --color-accent-gold: #d4af37;
+
+  /* Typography */
+  --font-serif: 'EB Garamond', serif;
+  --font-sans: 'Manrope', sans-serif;
+
+  /* Spacing and borders */
+  --border-radius-sm: 0.125rem;    /* 2px */
+  --border-radius-default: 0.25rem; /* 4px */
+  --border-radius-md: 0.375rem;     /* 6px */
+  --border-radius-lg: 0.5rem;       /* 8px */
+  --border-radius-xl: 0.75rem;      /* 12px */
+
+  --transition-smooth: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* Modern Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: var(--font-sans);
+  background-color: var(--color-background);
+  color: var(--color-primary);
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Base Typography Classes */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+p {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulseLine {
+  0%, 100% {
+    height: 40px;
+    opacity: 0.5;
+  }
+  50% {
+    height: 60px;
+    opacity: 1;
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 1.2s ease forwards;
+}
+
+.animate-slide-up {
+  opacity: 0;
+  animation: slideUp 0.8s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+}
+
+/* Delay modifiers */
+.delay-200 { animation-delay: 0.2s; }
+.delay-400 { animation-delay: 0.4s; }
+.delay-600 { animation-delay: 0.6s; }
+.delay-800 { animation-delay: 0.8s; }
+.delay-1000 { animation-delay: 1s; }

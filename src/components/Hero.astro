@@ -1,0 +1,258 @@
+---
+// Hero component representing the initial screen of the invitation
+---
+
+<header class="hero-container">
+  <!-- Dark Vignette Overlay for maximum text contrast and elegance -->
+  <div class="hero-overlay"></div>
+
+  <!-- Top-left Logo -->
+  <div class="logo-container">
+    <img src="/logo.png" alt="Emblema Oficial" class="logo-image" />
+  </div>
+
+  <!-- Center Content -->
+  <div class="content-wrapper">
+    <!-- Overline Label -->
+    <span class="overline-label"> PRESENTACIÓN </span>
+
+    <!-- Heading -->
+    <h1 class="main-heading">
+      El sabor del cacao<br />
+      <span class="italic-title">El Néctar De Los Dioses</span>
+    </h1>
+
+    <!-- Description Paragraph -->
+    <p class="description-text">
+      Una experiencia sensorial que trasciende el tiempo. Únete a la
+      presentación de nuestro proyecto artesanal.
+    </p>
+
+    <!-- Exploration Indicator -->
+    <div class="explore-indicator">
+      <span class="explore-label">CONOCE MÁS</span>
+      <div class="explore-line"></div>
+    </div>
+
+    <!-- Action Button -->
+    <div class="button-container">
+      <a href="#esencia" class="primary-button" id="btn-discover">
+        DESCUBRIR LA ESENCIA
+      </a>
+    </div>
+  </div>
+</header>
+
+<style>
+  /* Subtle heartbeat scale animation for the button */
+  @keyframes subtlePulse {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.04);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  .hero-container {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    min-height: 100dvh;
+    background-image: url("/cacao_bg.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 64px var(--margin-desktop, 64px);
+    overflow: hidden;
+  }
+
+  /* Dark Overlay for readability */
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      circle,
+      rgba(35, 8, 4, 0.65) 0%,
+      rgba(35, 8, 4, 0.85) 100%
+    );
+    z-index: 1;
+  }
+
+  /* Logo positioning */
+  .logo-container {
+    position: absolute;
+    top: 42px;
+    left: 42px;
+    z-index: 2;
+  }
+
+  .logo-image {
+    width: 74px;
+    height: 74px;
+    object-fit: contain;
+    border-radius: var(--border-radius-sm);
+    box-shadow: 0 4px 12px rgba(35, 8, 4, 0.3);
+    border: 1px solid rgba(213, 194, 191, 0.2);
+  }
+
+  /* Main content wrapper */
+  .content-wrapper {
+    position: relative;
+    z-index: 2;
+    max-width: 600px;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+  }
+
+  /* Overline Label styling */
+  .overline-label {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--color-accent-gold);
+    letter-spacing: 0.2em;
+    line-height: 1.2;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  }
+
+  /* Typography Main Heading */
+  .main-heading {
+    font-family: var(--font-serif);
+    font-size: 56px;
+    font-weight: 600;
+    line-height: 1.15;
+    color: #ffffff;
+    letter-spacing: -0.02em;
+    text-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+  }
+
+  .italic-title {
+    font-style: italic;
+    font-weight: 500;
+  }
+
+  /* Description text */
+  .description-text {
+    font-family: var(--font-sans);
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 1.6;
+    color: rgba(250, 249, 246, 0.9);
+    max-width: 480px;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  }
+
+  /* Explore marker */
+  .explore-indicator {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    margin-top: 16px;
+  }
+
+  .explore-label {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 700;
+    color: rgba(250, 249, 246, 0.6);
+    letter-spacing: 0.15em;
+  }
+
+  .explore-line {
+    width: 1px;
+    height: 50px;
+    background: linear-gradient(
+      to bottom,
+      rgba(250, 249, 246, 0.6) 0%,
+      rgba(250, 249, 246, 0) 100%
+    );
+  }
+
+  /* Button style */
+  .button-container {
+    margin-top: 8px;
+    width: 100%;
+  }
+
+  .primary-button {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--color-background);
+    background-color: var(--color-primary-container);
+    border: 1px solid rgba(213, 194, 191, 0.3);
+    padding: 16px 36px;
+    border-radius: var(--border-radius-default);
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    display: inline-block;
+    text-decoration: none;
+    /* Pulse scale animation running continuously */
+    animation: subtlePulse 2.5s infinite ease-in-out;
+    transition:
+      background-color 0.3s ease,
+      border-color 0.3s ease,
+      box-shadow 0.3s ease;
+  }
+
+  .primary-button:hover {
+    /* Stop the pulse and apply a slightly larger static scale on hover */
+    animation-play-state: paused;
+    transform: scale(1.06);
+    background-color: var(--color-primary);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    border-color: var(--color-accent-gold);
+  }
+
+  .primary-button:active {
+    transform: scale(0.98);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Responsive Adjustments */
+  @media (max-width: 768px) {
+    .hero-container {
+      padding: 40px var(--margin-mobile, 20px);
+    }
+
+    .logo-container {
+      top: 24px;
+      left: 20px;
+    }
+
+    .logo-image {
+      width: 60px;
+      height: 60px;
+    }
+
+    .main-heading {
+      font-size: 38px;
+      line-height: 1.2;
+    }
+
+    .description-text {
+      font-size: 15px;
+      max-width: 100%;
+    }
+
+    .primary-button {
+      padding: 14px 28px;
+      width: 100%;
+      max-width: 320px;
+    }
+  }
+</style>

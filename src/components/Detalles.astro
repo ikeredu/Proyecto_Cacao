@@ -1,0 +1,518 @@
+---
+// Detalles component representing the event details and dynamic countdown timer
+---
+
+<section id="detalles" class="detalles-section">
+  <div class="detalles-container">
+    <!-- Framed event image -->
+    <div class="event-image-wrapper">
+      <img
+        src="/cacao_pod.png"
+        alt="Cacao en vaina abierta"
+        class="event-image"
+      />
+    </div>
+
+    <!-- Title Header -->
+    <div class="section-header">
+      <h2 class="section-title">Detalles del Evento</h2>
+      <div class="title-divider"></div>
+    </div>
+
+    <!-- Details Grid: Date & Time in Columns -->
+    <div class="details-grid">
+      <!-- Date Column -->
+      <div class="detail-col">
+        <span class="detail-label">FECHA</span>
+        <h3 class="detail-value">19 de Junio</h3>
+        <span class="detail-subtext">2026</span>
+      </div>
+
+      <!-- Vertical line separator -->
+      <div class="vertical-divider"></div>
+
+      <!-- Time Column -->
+      <div class="detail-col">
+        <span class="detail-label">HORARIO</span>
+        <h3 class="detail-value">09:00 hrs</h3>
+        <span class="detail-subtext"></span>
+      </div>
+    </div>
+
+    <!-- Location centered below -->
+    <div class="location-wrapper">
+      <span class="detail-label">UBICACIÓN</span>
+      <h3 class="location-value">Plaza Cívica</h3>
+      <a
+        href="https://www.google.com/maps/place/Escuela+secundaria+t%C3%A9cnica+num+24/@17.4638208,-92.774993,20z/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="location-link"
+        title="Ver ubicación en Google Maps"
+      >
+        <span class="material-symbols-outlined">location_on</span>
+        Secundaria Técnica No. 24
+      </a>
+      <span class="location-subtext">Sabanilla, Tapijulapa, Tabasco</span>
+    </div>
+
+    <!-- Presenter Section -->
+    <div class="presenter-wrapper">
+      <span class="presenter-label">PRESENTADO POR</span>
+      <h4 class="presenter-name">Royder Méndez Frank</h4>
+    </div>
+
+    <!-- Countdown Card -->
+    <div class="countdown-card">
+      <div class="paper-texture"></div>
+      <span class="countdown-header">CUENTA REGRESIVA</span>
+
+      <div class="countdown-row">
+        <!-- Days -->
+        <div class="countdown-block">
+          <div class="countdown-box">
+            <span id="days-val" class="countdown-number">00</span>
+          </div>
+          <span class="countdown-label">Días</span>
+        </div>
+
+        <!-- Hours -->
+        <div class="countdown-block">
+          <div class="countdown-box">
+            <span id="hours-val" class="countdown-number">00</span>
+          </div>
+          <span class="countdown-label">Horas</span>
+        </div>
+
+        <!-- Minutes -->
+        <div class="countdown-block">
+          <div class="countdown-box">
+            <span id="minutes-val" class="countdown-number">00</span>
+          </div>
+          <span class="countdown-label">Minutos</span>
+        </div>
+
+        <!-- Seconds -->
+        <div class="countdown-block">
+          <div class="countdown-box">
+            <span id="seconds-val" class="countdown-number">00</span>
+          </div>
+          <span class="countdown-label">Segundos</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Client-side Javascript for the countdown timer -->
+<script>
+  // Target date: June 19, 2026 at 09:00:00 AM (local time timezone Tabasco GMT-6)
+  const targetDate = new Date("2026-06-19T09:00:00-06:00").getTime();
+
+  function updateCountdown() {
+    const now = new Date().getTime();
+    const distance = targetDate - now;
+
+    const daysEl = document.getElementById("days-val");
+    const hoursEl = document.getElementById("hours-val");
+    const minutesEl = document.getElementById("minutes-val");
+    const secondsEl = document.getElementById("seconds-val");
+
+    if (!daysEl || !hoursEl || !minutesEl || !secondsEl) return;
+
+    if (distance < 0) {
+      daysEl.innerText = "00";
+      hoursEl.innerText = "00";
+      minutesEl.innerText = "00";
+      secondsEl.innerText = "00";
+      return;
+    }
+
+    // Time calculations
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor(
+      (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60),
+    );
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    // Render with leading zero
+    daysEl.innerText = String(days).padStart(2, "0");
+    hoursEl.innerText = String(hours).padStart(2, "0");
+    minutesEl.innerText = String(minutes).padStart(2, "0");
+    secondsEl.innerText = String(seconds).padStart(2, "0");
+  }
+
+  // Run immediately and update every second
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+</script>
+
+<style>
+  /* Base section - Full screen height vertically centered */
+  .detalles-section {
+    width: 100%;
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--color-background);
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+
+  /* Paper texture pattern for countdown card */
+  .paper-texture {
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(
+      var(--color-outline-variant, #d5c2bf) 0.6px,
+      transparent 0.6px
+    );
+    background-size: 24px 24px;
+    opacity: 0.15;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* Container */
+  .detalles-container {
+    width: 100%;
+    max-width: var(--spacing-container-max, 1200px);
+    margin: 0 auto;
+    padding: 64px var(--margin-desktop, 64px);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+  }
+
+  /* Image gallery-style frame */
+  .event-image-wrapper {
+    width: 100%;
+    max-width: 460px;
+    box-shadow: 0 12px 36px rgba(35, 8, 4, 0.1);
+    border: 1px solid rgba(213, 194, 191, 0.2);
+    display: flex;
+    overflow: hidden;
+    aspect-ratio: 16 / 10;
+  }
+
+  .event-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: var(--transition-smooth);
+  }
+
+  .event-image:hover {
+    transform: scale(1.03);
+  }
+
+  /* Section Header */
+  .section-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 8px;
+  }
+
+  .section-title {
+    font-family: var(--font-serif);
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--color-primary);
+    line-height: 1.2;
+    margin-bottom: 12px;
+    text-align: center;
+  }
+
+  .title-divider {
+    width: 48px;
+    height: 1px;
+    background-color: rgba(35, 8, 4, 0.2);
+  }
+
+  /* Columns Grid (Date & Time) */
+  .details-grid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 460px;
+    gap: 32px;
+  }
+
+  .detail-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 6px;
+    flex: 1;
+  }
+
+  .detail-label {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--color-secondary);
+    letter-spacing: 0.15em;
+    line-height: 1.2;
+  }
+
+  .detail-value {
+    font-family: var(--font-serif);
+    font-size: 24px;
+    font-weight: 500;
+    color: var(--color-primary);
+    line-height: 1.2;
+  }
+
+  .detail-subtext {
+    font-family: var(--font-sans);
+    font-size: 15px;
+    color: var(--color-secondary);
+  }
+
+  .vertical-divider {
+    width: 1px;
+    height: 50px;
+    background-color: rgba(35, 8, 4, 0.15);
+  }
+
+  /* Location info block */
+  .location-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 6px;
+    width: 100%;
+  }
+
+  .location-value {
+    font-family: var(--font-serif);
+    font-size: 24px;
+    font-weight: 500;
+    color: var(--color-primary);
+    line-height: 1.2;
+  }
+
+  .location-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-family: var(--font-sans);
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--color-accent-green);
+    text-decoration: none;
+    transition: var(--transition-smooth);
+    padding: 2px 4px;
+    border-radius: var(--border-radius-sm);
+  }
+
+  .location-link .material-symbols-outlined {
+    font-size: 18px;
+    font-variation-settings:
+      "FILL" 1,
+      "wght" 400,
+      "GRAD" 0,
+      "opsz" 24;
+  }
+
+  .location-link:hover {
+    color: var(--color-primary);
+    text-shadow: 0 1px 2px rgba(35, 8, 4, 0.05);
+  }
+
+  .location-subtext {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    color: var(--color-secondary);
+  }
+
+  /* Presenter block */
+  .presenter-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 4px;
+    margin-top: 4px;
+    width: 100%;
+  }
+
+  .presenter-label {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--color-secondary);
+    letter-spacing: 0.15em;
+    line-height: 1.2;
+  }
+
+  .presenter-name {
+    font-family: var(--font-serif);
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--color-primary);
+    line-height: 1.2;
+    letter-spacing: 0.02em;
+  }
+
+  /* Countdown Card */
+  .countdown-card {
+    position: relative;
+    width: 100%;
+    max-width: 460px;
+    background-color: var(--color-surface-container-low, #f4f3f1);
+    border: 1px solid rgba(35, 8, 4, 0.05);
+    border-radius: var(--border-radius-default, 4px);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    box-sizing: border-box;
+    margin-top: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(35, 8, 4, 0.03);
+  }
+
+  .countdown-header {
+    position: relative;
+    z-index: 2;
+    font-family: var(--font-sans);
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--color-secondary);
+    letter-spacing: 0.2em;
+    line-height: 1.2;
+    text-align: center;
+  }
+
+  .countdown-row {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    width: 100%;
+  }
+
+  .countdown-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+    max-width: 70px;
+  }
+
+  .countdown-box {
+    width: 100%;
+    aspect-ratio: 1;
+    background-color: var(--color-surface, #faf9f6);
+    border: 1px solid rgba(35, 8, 4, 0.08);
+    border-radius: var(--border-radius-default, 4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(35, 8, 4, 0.02);
+  }
+
+  .countdown-number {
+    font-family: var(--font-serif);
+    font-size: 24px;
+    font-weight: 500;
+    color: var(--color-primary);
+    line-height: 1;
+  }
+
+  .countdown-label {
+    font-family: var(--font-sans);
+    font-size: 9px;
+    font-weight: 700;
+    color: var(--color-secondary);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-align: center;
+  }
+
+  /* Responsive Styling */
+  @media (max-width: 768px) {
+    .detalles-container {
+      padding: 48px var(--margin-mobile, 20px) 32px;
+      gap: 24px;
+    }
+
+    .event-image-wrapper {
+      max-width: 320px;
+    }
+
+    .section-title {
+      font-size: 26px;
+      margin-bottom: 8px;
+    }
+
+    .details-grid {
+      gap: 16px;
+    }
+
+    .detail-value {
+      font-size: 20px;
+    }
+
+    .detail-subtext {
+      font-size: 14px;
+    }
+
+    .vertical-divider {
+      height: 40px;
+    }
+
+    .location-value {
+      font-size: 20px;
+    }
+
+    .location-link {
+      font-size: 15px;
+    }
+
+    .location-subtext {
+      font-size: 13px;
+    }
+
+    .presenter-name {
+      font-size: 19px;
+    }
+
+    .countdown-card {
+      padding: 16px;
+      gap: 12px;
+    }
+
+    .countdown-row {
+      gap: 10px;
+    }
+
+    .countdown-block {
+      max-width: 60px;
+    }
+
+    .countdown-number {
+      font-size: 20px;
+    }
+
+    .countdown-label {
+      font-size: 8px;
+    }
+  }
+</style>

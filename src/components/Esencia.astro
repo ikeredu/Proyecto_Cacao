@@ -1,0 +1,217 @@
+---
+// Esencia component representing the academic details of the cacao project
+---
+
+<section id="esencia" class="esencia-section">
+  <!-- Section 1: Campos Formativos -->
+  <div class="campos-container">
+    <div class="section-header">
+      <h2 class="section-title">Campos Formativos</h2>
+      <div class="title-divider"></div>
+    </div>
+
+    <div class="cards-grid">
+      <!-- Card 1 -->
+      <div class="formativo-card">
+        <div class="paper-texture"></div>
+        <div class="card-icon-wrapper">
+          <span class="material-symbols-outlined">balance</span>
+        </div>
+        <h3 class="card-heading">Ética, Naturaleza y Sociedad</h3>
+        <p class="card-description">
+          Exploramos el impacto socio-ambiental y la responsabilidad ética en su cadena de valor.
+        </p>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="formativo-card">
+        <div class="paper-texture"></div>
+        <div class="card-icon-wrapper">
+          <span class="material-symbols-outlined">biotech</span>
+        </div>
+        <h3 class="card-heading">Saberes y Pensamiento Científico</h3>
+        <p class="card-description">
+          Análisis químico y botánico del fruto, uniendo ciencia moderna con herencia ancestral.
+        </p>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="formativo-card">
+        <div class="paper-texture"></div>
+        <div class="card-icon-wrapper">
+          <span class="material-symbols-outlined">auto_stories</span>
+        </div>
+        <h3 class="card-heading">Lenguajes</h3>
+        <p class="card-description">
+          La narrativa visual y escrita que rodea al cacao como símbolo de identidad cultural.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Base section - Full Screen height with vertical centering */
+  .esencia-section {
+    width: 100%;
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--color-background);
+    box-sizing: border-box;
+  }
+
+  /* Paper texture pattern for cards */
+  .paper-texture {
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(var(--color-outline-variant, #d5c2bf) 0.6px, transparent 0.6px);
+    background-size: 24px 24px;
+    opacity: 0.15;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* Container styling - Flex layout to center content vertically and take full viewport */
+  .campos-container {
+    width: 100%;
+    max-width: var(--spacing-container-max, 1200px);
+    margin: 0 auto;
+    padding: 96px var(--margin-desktop, 64px);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+
+  .section-header {
+    margin-bottom: 48px;
+  }
+
+  .section-title {
+    font-family: var(--font-serif);
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--color-primary);
+    line-height: 1.2;
+    margin-bottom: 12px;
+  }
+
+  .title-divider {
+    width: 48px;
+    height: 1px;
+    background-color: rgba(35, 8, 4, 0.2);
+  }
+
+  /* Grid and Cards */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    width: 100%;
+  }
+
+  .formativo-card {
+    position: relative;
+    background-color: var(--color-surface-container-low, #f4f3f1);
+    border: 1px solid rgba(35, 8, 4, 0.05);
+    border-radius: var(--border-radius-default, 4px);
+    padding: 36px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    overflow: hidden;
+    transition: var(--transition-smooth);
+    box-sizing: border-box;
+  }
+
+  .formativo-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(35, 8, 4, 0.06);
+    border-color: rgba(35, 8, 4, 0.15);
+  }
+
+  .card-icon-wrapper {
+    position: relative;
+    z-index: 2;
+    width: 40px;
+    height: 40px;
+    background-color: var(--color-primary);
+    color: var(--color-background);
+    border-radius: var(--border-radius-sm, 2px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .card-icon-wrapper .material-symbols-outlined {
+    font-size: 20px;
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  }
+
+  .card-heading {
+    position: relative;
+    z-index: 2;
+    font-family: var(--font-serif);
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--color-primary);
+    line-height: 1.3;
+  }
+
+  .card-description {
+    position: relative;
+    z-index: 2;
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--color-on-surface-variant, #514441);
+    line-height: 1.6;
+  }
+
+  /* Responsive styling */
+  @media (max-width: 1024px) {
+    .cards-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .campos-container {
+      padding: 64px var(--margin-mobile, 20px) 48px;
+    }
+
+    .section-header {
+      margin-bottom: 32px;
+    }
+
+    .section-title {
+      font-size: 26px;
+      margin-bottom: 8px;
+    }
+
+    .cards-grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .formativo-card {
+      padding: 24px;
+      gap: 12px;
+    }
+
+    .card-heading {
+      font-size: 18px;
+    }
+
+    .card-description {
+      font-size: 13.5px;
+      line-height: 1.5;
+    }
+  }
+</style>
