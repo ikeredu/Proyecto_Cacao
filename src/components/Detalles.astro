@@ -55,10 +55,101 @@
       <span class="location-subtext">Sabanilla, Tapijulapa, Tabasco</span>
     </div>
 
-    <!-- Presenter Section -->
-    <div class="presenter-wrapper">
-      <span class="presenter-label">PRESENTADO POR</span>
-      <h4 class="presenter-name">Lic. Royder Méndez Frank</h4>
+    <!-- Presenter Section (Grid de Docentes con Animación) -->
+    <div class="presenters-section">
+      <span class="presenter-label">PRESENTADO POR NUESTRO CUERPO DOCENTE</span>
+      <div class="presenters-grid">
+        <!-- Docente 1 -->
+        <div class="presenter-card">
+          <div class="presenter-icon">
+            <span class="material-symbols-outlined">school</span>
+          </div>
+          <div class="presenter-info">
+            <span class="presenter-title">DRA.</span>
+            <h4 class="presenter-name">Roxana Núñez Hernández</h4>
+          </div>
+        </div>
+        <!-- Docente 2 -->
+        <div class="presenter-card">
+          <div class="presenter-icon">
+            <span class="material-symbols-outlined">school</span>
+          </div>
+          <div class="presenter-info">
+            <span class="presenter-title">MTRO.</span>
+            <h4 class="presenter-name">Carmen García Marín</h4>
+          </div>
+        </div>
+        <!-- Docente 3 -->
+        <div class="presenter-card">
+          <div class="presenter-icon">
+            <span class="material-symbols-outlined">school</span>
+          </div>
+          <div class="presenter-info">
+            <span class="presenter-title">PROFR.</span>
+            <h4 class="presenter-name">Timoteo Gallegos Jiménez</h4>
+          </div>
+        </div>
+        <!-- Docente 4 -->
+        <div class="presenter-card">
+          <div class="presenter-icon">
+            <span class="material-symbols-outlined">school</span>
+          </div>
+          <div class="presenter-info">
+            <span class="presenter-title">PROFR.</span>
+            <h4 class="presenter-name">Guadalupe Alain Mendoza Witt</h4>
+          </div>
+        </div>
+        <!-- Docente 5 -->
+        <div class="presenter-card">
+          <div class="presenter-icon">
+            <span class="material-symbols-outlined">school</span>
+          </div>
+          <div class="presenter-info">
+            <span class="presenter-title">PROFR.</span>
+            <h4 class="presenter-name">Royder Méndez Frank</h4>
+          </div>
+        </div>
+        <!-- Docente 6 -->
+        <div class="presenter-card">
+          <div class="presenter-icon">
+            <span class="material-symbols-outlined">school</span>
+          </div>
+          <div class="presenter-info">
+            <span class="presenter-title">PROFR.</span>
+            <h4 class="presenter-name">Jesús Manuel López Cancino</h4>
+          </div>
+        </div>
+        <!-- Docente 7 -->
+        <div class="presenter-card">
+          <div class="presenter-icon">
+            <span class="material-symbols-outlined">school</span>
+          </div>
+          <div class="presenter-info">
+            <span class="presenter-title">PROFA.</span>
+            <h4 class="presenter-name">Alejandra Hernández Acopa</h4>
+          </div>
+        </div>
+        <!-- Docente 8 -->
+        <div class="presenter-card">
+          <div class="presenter-icon">
+            <span class="material-symbols-outlined">school</span>
+          </div>
+          <div class="presenter-info">
+            <span class="presenter-title">PROFR.</span>
+            <h4 class="presenter-name">Rogelio Martínez Jiménez</h4>
+          </div>
+        </div>
+        <!-- Docente 9 -->
+        <div class="presenter-card">
+          <div class="presenter-icon">
+            <span class="material-symbols-outlined">school</span>
+          </div>
+          <div class="presenter-info">
+            <span class="presenter-title">PROFR.</span>
+            <h4 class="presenter-name">Jorge Luis Torres Cruz</h4>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- Countdown Card -->
@@ -145,6 +236,33 @@
   // Run immediately and update every second
   updateCountdown();
   setInterval(updateCountdown, 1000);
+
+  // Lógica de detección de scroll para la grilla de docentes (staggered animation)
+  const observerOptions = {
+    root: null,
+    rootMargin: '0px 0px -80px 0px',
+    threshold: 0.1
+  };
+
+  const presentersObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const cards = entry.target.querySelectorAll('.presenter-card');
+        cards.forEach((card, index) => {
+          // Asigna un delay dinámico para lograr el efecto escalonado (stagger)
+          (card as HTMLElement).style.transitionDelay = `${index * 80}ms`;
+          card.classList.add('visible');
+        });
+        // Deja de observar una vez activada la animación
+        presentersObserver.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  const presentersGrid = document.querySelector('.presenters-grid');
+  if (presentersGrid) {
+    presentersObserver.observe(presentersGrid);
+  }
 </script>
 
 <style>
@@ -337,15 +455,15 @@
     color: var(--color-secondary);
   }
 
-  /* Presenter block */
-  .presenter-wrapper {
+  /* Presenters Section & Grid */
+  .presenters-section {
     display: flex;
     flex-direction: column;
     align-items: center;
-    text-align: center;
-    gap: 4px;
-    margin-top: 4px;
     width: 100%;
+    max-width: 900px;
+    gap: 16px;
+    margin-top: 8px;
   }
 
   .presenter-label {
@@ -355,15 +473,109 @@
     color: var(--color-secondary);
     letter-spacing: 0.15em;
     line-height: 1.2;
+    text-align: center;
+  }
+
+  .presenters-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    width: 100%;
+  }
+
+  /* Academic Card Styling & Entrance Animation */
+  .presenter-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background-color: var(--color-surface-container-low, #f4f3f1);
+    border: 1px solid rgba(35, 8, 4, 0.04);
+    border-radius: var(--border-radius-default, 4px);
+    padding: 14px 18px;
+    text-align: left;
+    box-shadow: 0 2px 6px rgba(35, 8, 4, 0.01);
+    
+    /* Estado inicial de la animación */
+    opacity: 0;
+    transform: translateY(20px);
+    transition: 
+      opacity 0.6s cubic-bezier(0.25, 0.8, 0.25, 1),
+      transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1),
+      border-color 0.3s ease,
+      box-shadow 0.3s ease;
+  }
+
+  /* Estado visible al entrar al viewport */
+  .presenter-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Sutil hover para usuarios de escritorio */
+  .presenter-card:hover {
+    border-color: rgba(74, 103, 65, 0.25); /* Verde orgánico semi-transparente */
+    box-shadow: 0 6px 16px rgba(35, 8, 4, 0.04);
+  }
+
+  .presenter-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background-color: rgba(74, 103, 65, 0.1); /* Verde orgánico a 10% opacidad */
+    color: var(--color-accent-green, #4a6741);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .presenter-icon .material-symbols-outlined {
+    font-size: 16px;
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+  }
+
+  .presenter-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .presenter-title {
+    font-family: var(--font-sans);
+    font-size: 9px;
+    font-weight: 700;
+    color: var(--color-accent-green, #4a6741); /* Verde orgánico en lugar de dorado o amarillo */
+    letter-spacing: 0.1em;
+    line-height: 1;
   }
 
   .presenter-name {
     font-family: var(--font-serif);
-    font-size: 22px;
-    font-weight: 500;
+    font-size: 15px;
+    font-weight: 600;
     color: var(--color-primary);
-    line-height: 1.2;
-    letter-spacing: 0.02em;
+    line-height: 1.25;
+  }
+
+  /* Ajustes de grilla responsiva */
+  @media (max-width: 850px) {
+    .presenters-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+  }
+
+  @media (max-width: 550px) {
+    .presenters-grid {
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+    .presenter-card {
+      padding: 12px 16px;
+    }
+    .presenter-name {
+      font-size: 14px;
+    }
   }
 
   /* Countdown Card */
@@ -489,9 +701,6 @@
       font-size: 13px;
     }
 
-    .presenter-name {
-      font-size: 19px;
-    }
 
     .countdown-card {
       padding: 16px;
